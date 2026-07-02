@@ -1,1 +1,2 @@
-Employee Name: Neha
+Name = Neha
+Emp_ID = 574

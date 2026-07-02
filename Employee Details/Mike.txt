@@ -1,1 +1,2 @@
-Employee Name: Mike
+Name = Mike
+Emp_ID = 456
