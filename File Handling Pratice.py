@@ -265,3 +265,180 @@ with open('Sample.txt','r')as f:
     print(f.read())
     print(f.tell())
 
+with open('sea.txt','w')as f:
+    f.writelines('Rishav')
+    f.writelines('Jim')
+    f.writelines('adam')
+    f.writelines('Neha')
+
+with open('sea.txt','r')as f:
+    print(f.read())
+    print(f.tell())
+    f.seek(0)
+    print(f.read(10))
+    f.seek(0)
+    print(f.read())
+
+with open ('sea.txt','w')as f:
+    f.write('\n python is good language')
+
+with open('sea.txt','a')as f:
+    f.writelines(['\n sql','\npandas','\nNumpy'])
+
+
+
+#seek seek() ka use file pointer ko kisi specific position par le jane ke liye hota hai.
+
+with open('sample.txt','r')as f:
+    print(f.read())
+    print(f.tell())
+    print(f.seek(10))
+    print(f.read())
+
+# #seek during write
+# with open('sea.txt','w')as f:
+#     f.write('hello')
+#     f.seek(0)
+#     f.write('a')
+
+# # Work with binary files (rb) read binary .(wb)write binary
+# with open('picture.png','rb')as f:
+#     with open('screensave.png','wb')as wf:
+#         wf.write(f.read())
+
+# it not work on data types like list,tuple,float
+
+#if you want you need to use it in form of string
+
+with open('sea.txt','w')as f:
+    f.write('5')
+
+with open('sea.txt','r')as f:
+    print(int(f.read())+5)
+
+#more complex code like (dict)
+d={
+    'name':'rishav',
+    'age':33,
+    'gender':'male',
+}
+
+with open('sea.txt','w')as f:
+    f.write(str(d))
+
+#read
+with open('sea.txt','r')as f:
+    print(f.read())
+
+#Serialization using json module (convert python datatype to json)
+#list
+import json
+L=[4,5,6,7,73,4,3]
+
+with open('demo.json','w')as f:
+    json.dump(L,f)
+
+#dict
+d={
+    'name':'rishav',
+    'age':33,
+    'gender':'male',
+}
+with open ('demo.json','w')as f:
+    json.dump(d,f,indent=4)# for better representation
+
+#deserilaization(json se pthon mein convert)
+import json
+
+with open('demo.json','r')as f:
+    d=json.load(f)
+    print(d)
+    print(type(d))
+
+#serialize and deserailize tuple(give list hi return krta hai serilize and deserialize)
+#tuple cant be stored it's return list
+
+#if both have dict and list also work
+d={
+    'student':'nitish',
+    'marks':[23,45,6,7,42,3]
+}
+with open('demo.json','w')as f:
+    json.dump(d,f)
+
+#Serilaizing and Deserialization cutom objects
+import json
+
+class Person:
+
+    def __init__(self, fname, lname, age, gender):
+        self.fname = fname
+        self.lname = lname
+        self.age = age
+        self.gender = gender
+
+
+# Create Object
+p1 = Person("Rishav", "Rathore", 23, "Male")
+
+
+# Convert object to string
+def show_object(obj):
+    if isinstance(obj, Person):
+        return "{} {} age->{} gender->{}".format(
+            obj.fname, obj.lname, obj.age, obj.gender
+        )
+
+
+with open("demo_string.json", "w") as f:
+    json.dump(p1, f, default=show_object)
+
+
+# Convert object to dictionary
+def show_dict(obj):
+    if isinstance(obj, Person):
+        return {
+            "name": obj.fname + " " + obj.lname,
+            "age": obj.age,
+            "gender": obj.gender
+        }
+
+
+with open("demo_dict.json", "w") as f:
+    json.dump(p1, f, default=show_dict, indent=4)
+
+# deserialization
+import json
+
+with open('demo.json','r')as f:
+    d=json.load(f)
+    print(d)
+    print(type(d))
+
+#Pickling
+class Person:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def display_info(self):
+        print("Hi my name is", self.name, "and I am", self.age, "years old")
+
+
+p=Person('rishav',33)
+
+#Pickle Dump
+import pickle
+with open('person.pk','wb')as f:
+    pickle.dump(p,f)
+
+#Pickle Load
+import pickle
+with open('person.pk','rb')as f:
+    p=pickle.load(f)
+
+p.display_info()
+
+
+

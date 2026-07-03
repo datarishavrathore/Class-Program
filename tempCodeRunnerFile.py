@@ -1,4 +1,2 @@
-f=open('handle.txt','r')
-s=f.read(5)
-print(s)
-f.close()
+with open('sea.txt','a')as f:
+    f.writelines('\n sql','\npandas','\nNumpy')
